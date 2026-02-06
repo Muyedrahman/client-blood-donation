@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 const ErrorPage = () => {
   const navigate = useNavigate();
@@ -48,6 +48,7 @@ const ErrorPage = () => {
                 />
               </svg>
 
+              {/* <span>Go Bback</span> */}
               <span>Go back</span>
             </button>
 
