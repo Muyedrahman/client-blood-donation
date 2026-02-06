@@ -58,13 +58,13 @@ const ContactUs = ({ contactNumber, emailAddress }) => {
           <div className="bg-white p-10 rounded-lg shadow-md">
             <h3 className="text-xl font-semibold mb-4 text-center mt-3">Contact Information</h3>
             <p className="text-gray-700 mb-2">
-              <span className="font-semibold">Phone:</span> {contactNumber}
+              <span className="font-semibold">Phone: </span> {contactNumber}
             </p>
             <p className="text-gray-700 mb-2">
               <span className="font-semibold">Email:</span> {emailAddress}
             </p>
             <p className="text-gray-700 mb-2">
-              <span className="font-semibold">Address:</span> Meherpur , Meherpur, Sadar 7100,
+              <span className="font-semibold">Address: </span> Meherpur , Meherpur, Sadar 7100,
               Bangladesh
             </p>
           </div>

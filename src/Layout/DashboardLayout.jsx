@@ -1,4 +1,5 @@
-import { Outlet } from "react-router-dom"
+// import { Outlet } from "react-router-dom"
+import { Outlet } from "react-router-dom";
 import SideBar from "../Dashboard/SideBar/SideBar"
 
 function DashboardLayout() {
@@ -8,7 +9,7 @@ function DashboardLayout() {
         <SideBar />
       </div>
       <div className="w-full">
-        <Outlet />
+        <Outlet ></Outlet>
       </div>
     </div>
   );
