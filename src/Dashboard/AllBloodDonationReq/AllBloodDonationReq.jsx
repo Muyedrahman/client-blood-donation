@@ -1,7 +1,7 @@
-import axios from 'axios';
-import { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { AuthContext } from '../../Firebase/AuthProvider';
+import axios from "axios";
+import { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../../Firebase/AuthProvider";
 
 function AllBloodDonationReq() {
   const [myDonationReq, setMyDonationReq] = useState([]);
@@ -15,7 +15,7 @@ function AllBloodDonationReq() {
   useEffect(() => {
     const fetchUserData = async () => {
       const { data } = await axios.get(
-        `https://blood-for-life.vercel.app/users/${user?.email}`
+        `https://blood-for-life.vercel.app/users/${user?.email}`,
       );
       setUserData(data[0]);
     };
@@ -25,16 +25,16 @@ function AllBloodDonationReq() {
   useEffect(() => {
     const fetchDonationRequests = async () => {
       const { data } = await axios.get(
-        'https://blood-for-life.vercel.app/donation-requests'
+        "https://blood-for-life.vercel.app/donation-requests",
       );
       setMyDonationReq(data);
     };
     fetchDonationRequests();
   }, [control]);
 
-  const handleDelete = async _id => {
+  const handleDelete = async (_id) => {
     await axios.delete(
-      `https://blood-for-life.vercel.app/donation-requests/${_id}`
+      `https://blood-for-life.vercel.app/donation-requests/${_id}`,
     );
     setControl(!control);
   };
@@ -44,11 +44,11 @@ function AllBloodDonationReq() {
   const indexOfFirstRequest = indexOfLastRequest - requestsPerPage;
   const currentRequests = myDonationReq.slice(
     indexOfFirstRequest,
-    indexOfLastRequest
+    indexOfLastRequest,
   );
 
   // Change page
-  const paginate = pageNumber => setCurrentPage(pageNumber);
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <div className="my-10 lg:my-20 mx-4 lg:mx-10">
@@ -63,7 +63,7 @@ function AllBloodDonationReq() {
               <th>Donation Time</th>
               <th>Donation Status</th>
               <th>Edit</th>
-              {userData?.role === 'admin' && <th>Delete</th>}
+              {userData?.role === "admin" && <th>Delete</th>}
               <th>View Details</th>
               <th></th>
             </tr>
@@ -85,7 +85,7 @@ function AllBloodDonationReq() {
                   </Link>
                 </td>
                 <td>
-                  {userData?.role === 'admin' && (
+                  {userData?.role === "admin" && (
                     <button
                       onClick={() => handleDelete(item?._id)}
                       className="btn btn-error btn-sm"
@@ -114,7 +114,7 @@ function AllBloodDonationReq() {
               >
                 {i + 1}
               </button>
-            )
+            ),
           )}
         </div>
       </div>

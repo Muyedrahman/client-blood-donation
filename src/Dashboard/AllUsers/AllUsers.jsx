@@ -1,91 +1,91 @@
-import { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../Firebase/AuthProvider';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
-function AllUsers() {
+function AllUsers  ()  {
   const [userData, setUserData] = useState([]);
-  const { user } = useContext(AuthContext);
-  const [control, setControl] = useState(false);
-  const [statusFilter, setStatusFilter] = useState(''); // Add state for filter
+  const {user} = useContext(AuthContext);
+   const [control, setControl] = useState(false);
+    const [statusFilter, setStatusFilter] = useState("");
 
-  useEffect(() => {
-    (async () => {
-      const { data } = await axios.get(
-        `https://blood-for-life.vercel.app/users`
-      );
-      setUserData(data);
-    })();
-  }, [user?.email, control]);
+ 
+   useEffect(() => {
+     (async () => {
+       const { data } = await axios.get(
+         `https://blood-for-life.vercel.app/users`,
+       );
+       setUserData(data);
+     })();
+   }, [user?.email, control]);
 
-  const handleBlock = async (id, status, role) => {
-    if (status === 'active' && role !== 'admin') {
-      const response = await axios.patch(
-        `https://blood-for-life.vercel.app/users/block/${id}`
-      );
-      if (response.data.modifiedCount) {
-        Swal.fire('Successful updated Status');
-        setControl(!control);
-      }
-    } else if (role === 'admin') {
-      Swal.fire('You can not block Admin');
-    } else {
-      Swal.fire('Status is already Blocked');
-    }
-  };
+   const handleBlock = async (id, status, role) => {
+     if (status === "active" && role !== "admin") {
+       const response = await axios.patch(
+         `https://blood-for-life.vercel.app/users/block/${id}`,
+       );
+       if (response.data.modifiedCount) {
+         Swal.fire("Successful updated Status");
+         setControl(!control);
+       }
+     } else if (role === "admin") {
+       Swal.fire("You can not block Admin");
+     } else {
+       Swal.fire("Status is already Blocked");
+     }
+   };
 
-  const handleUnBlock = async (id, status, role) => {
-    if (status === 'block' && role !== 'admin') {
-      const response = await axios.patch(
-        `https://blood-for-life.vercel.app/users/active/${id}`
-      );
-      if (response.data.modifiedCount) {
-        Swal.fire('Successful updated Status');
-        setControl(!control);
-      }
-    } else if (role === 'admin') {
-      Swal.fire('You can not Unblock Admin');
-    } else {
-      Swal.fire('Status is already active');
-    }
-  };
+   const handleUnBlock = async (id, status, role) => {
+     if (status === "block" && role !== "admin") {
+       const response = await axios.patch(
+         `https://blood-for-life.vercel.app/users/active/${id}`,
+       );
+       if (response.data.modifiedCount) {
+         Swal.fire("Successful updated Status");
+         setControl(!control);
+       }
+     } else if (role === "admin") {
+       Swal.fire("You can not Unblock Admin");
+     } else {
+       Swal.fire("Status is already active");
+     }
+   };
 
-  const handleVolunteer = async (id, role) => {
-    if (role === 'donor') {
-      const response = await axios.patch(
-        `https://blood-for-life.vercel.app/users/volunteer/${id}`
-      );
-      if (response.data.modifiedCount) {
-        Swal.fire('Successful updated Status');
-        setControl(!control);
-      }
-    } else {
-      Swal.fire('Account is already Volunteer');
-    }
-  };
+   const handleVolunteer = async (id, role) => {
+     if (role === "donor") {
+       const response = await axios.patch(
+         `https://blood-for-life.vercel.app/users/volunteer/${id}`,
+       );
+       if (response.data.modifiedCount) {
+         Swal.fire("Successful updated Status");
+         setControl(!control);
+       }
+     } else {
+       Swal.fire("Account is already Volunteer");
+     }
+   };
 
-  const handleAdmin = async (id, role) => {
-    if (role === 'donor' || role === 'volunteer') {
-      const response = await axios.patch(
-        `https://blood-for-life.vercel.app/users/makeAdmin/${id}`
-      );
-      if (response.data.modifiedCount) {
-        Swal.fire('Successful updated Status');
-        setControl(!control);
-      }
-    } else {
-      Swal.fire('Account is already Admin');
-    }
-  };
+   const handleAdmin = async (id, role) => {
+     if (role === "donor" || role === "volunteer") {
+       const response = await axios.patch(
+         `https://blood-for-life.vercel.app/users/makeAdmin/${id}`,
+       );
+       if (response.data.modifiedCount) {
+         Swal.fire("Successful updated Status");
+         setControl(!control);
+       }
+     } else {
+       Swal.fire("Account is already Admin");
+     }
+   };
 
-  const handleStatusChange = event => {
-    setStatusFilter(event.target.value); // Update filter state
-  };
+   const handleStatusChange = (event) => {
+     setStatusFilter(event.target.value); // Update filter state
+   };
 
-  const filteredUsers = statusFilter
-    ? userData.filter(user => user.status === statusFilter)
-    : userData;
-
+   const filteredUsers = statusFilter
+     ? userData.filter((user) => user.status === statusFilter)
+     : userData;
   return (
     <div className="my-10">
       <div className="mb-4">
@@ -106,7 +106,6 @@ function AllUsers() {
           <option value="block">Blocked</option>
         </select>
       </div>
-
       <div className="overflow-x-auto">
         <table className="table">
           {/* head */}
@@ -125,7 +124,7 @@ function AllUsers() {
             </tr>
           </thead>
           <tbody>
-            {filteredUsers?.map(item => (
+            {filteredUsers?.map((item) => (
               <tr key={item._id}>
                 <td>
                   <div className="mask mask-squircle w-12 h-12">
@@ -179,6 +178,6 @@ function AllUsers() {
       </div>
     </div>
   );
-}
+};
 
 export default AllUsers;
