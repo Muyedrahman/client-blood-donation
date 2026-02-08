@@ -1,42 +1,33 @@
-import axios from 'axios';
-import React,{ useEffect, useState }  from 'react';
-import { Link } from 'react-router-dom';
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
-
-const DonationRequest = () => {
+function DonationRequest() {
   const [donationRequest, setDonationRequest] = useState([]);
-
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const status = "pending";
-        const { data } = await axios.get(
-          `https://blood-for-life.vercel.app/donation-requests/home/${status}`,
-        );
-        setDonationRequest(data);
-      } catch (error) {
-        console.error("Error fetching donation requests:", error);
-      }
-    };
-
-    fetchData();
+    (async () => {
+      const status = "pending";
+      const { data } = await axios.get(
+        `https://blood-for-life.vercel.app/donation-requests/home/${status}`,
+      );
+      setDonationRequest(data);
+    })();
   }, []);
-
 
   return (
     <div className="my-10 lg:my-20">
       <h2 className="text-4xl lg:text-5xl font-semibold lg:font-bold text-center mb-4 lg:mb-6">
         Donation Request Page
       </h2>
-
       <div className="overflow-x-auto">
         <table className="table">
+          {/* head */}
           <thead>
             <tr>
               <th></th>
               <th>Recipient Name</th>
               <th>Location</th>
-              <th>Date</th>
+              <th>Data</th>
               <th>Time</th>
               <th>Details</th>
             </tr>
@@ -63,6 +54,6 @@ const DonationRequest = () => {
       </div>
     </div>
   );
-};
+}
 
 export default DonationRequest;
