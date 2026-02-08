@@ -1,13 +1,14 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+
 import { AuthContext } from "../../Firebase/AuthProvider";
+import { Link } from "react-router-dom";
 
 function AllBloodDonationReq() {
   const [myDonationReq, setMyDonationReq] = useState([]);
   const [control, setControl] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [requestsPerPage] = useState(10); // Number of requests per page
+  const [requestsPerPage] = useState(10); 
 
   const [userData, setUserData] = useState([]);
   const { user } = useContext(AuthContext);
@@ -40,7 +41,7 @@ function AllBloodDonationReq() {
   };
 
   // Get current posts
-  const indexOfLastRequest = currentPage * requestsPerPage;
+  const indexOfLastRequest = currentPage + requestsPerPage;
   const indexOfFirstRequest = indexOfLastRequest - requestsPerPage;
   const currentRequests = myDonationReq.slice(
     indexOfFirstRequest,
@@ -52,6 +53,10 @@ function AllBloodDonationReq() {
 
   return (
     <div className="my-10 lg:my-20 mx-4 lg:mx-10">
+      <div>
+        <h3>All Donar</h3>
+        <p>balad donation is a </p>
+      </div>
       <div className="overflow-x-auto">
         <table className="table table-xs table-pin-rows table-pin-cols">
           <thead>
