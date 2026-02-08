@@ -41,7 +41,7 @@ function AllBloodDonationReq() {
   };
 
   // Get current posts
-  const indexOfLastRequest = currentPage + requestsPerPage;
+  const indexOfLastRequest = currentPage * requestsPerPage;
   const indexOfFirstRequest = indexOfLastRequest - requestsPerPage;
   const currentRequests = myDonationReq.slice(
     indexOfFirstRequest,
@@ -49,14 +49,12 @@ function AllBloodDonationReq() {
   );
 
   // Change page
+  // const paginate = (pageNumber) => setCurrentPage();
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <div className="my-10 lg:my-20 mx-4 lg:mx-10">
-      <div>
-        <h3>All Donar</h3>
-        <p>balad donation is a </p>
-      </div>
+     
       <div className="overflow-x-auto">
         <table className="table table-xs table-pin-rows table-pin-cols">
           <thead>
