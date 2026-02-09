@@ -1,20 +1,31 @@
+// import axios from 'axios';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const Funding = () => {
-    const [fundings, setFundings] = useState([]);
+  const [fundings, setFundings] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [fundingsPerPage] = useState(10);
 
-    useEffect(() => {
-      const fetchFundings = async () => {
-        const response = await axios.get(
-          "https://blood-for-life.vercel.app/fundings",
-        );
-        setFundings(response.data);
-      };
+  useEffect(() => {
+    const fetchFundings = async () => {
+      const response = await axios.get(
+        "https://blood-for-life.vercel.app/fundings",
+      );
+      setFundings(response.data);
+    };
 
-      fetchFundings();
-    }, []);
+    fetchFundings();
+  }, []);
+
+  // Get current fundings
+  const indexOfLastFunding = currentPage * fundingsPerPage;
+  const indexOfFirstFunding = indexOfLastFunding - fundingsPerPage;
+  const currentFundings = fundings.slice(
+    indexOfFirstFunding,
+    indexOfLastFunding,
+  );
   return (
     <div className="container mx-auto px-4 my-10">
       <div className="flex justify-between items-center my-8">
@@ -33,7 +44,7 @@ const Funding = () => {
             </tr>
           </thead>
           <tbody>
-            {fundings.map((funding) => (
+            {currentFundings.map((funding) => (
               <tr key={funding.id}>
                 <td className="py-2 px-4 border-b">{funding.name}</td>
                 <td className="py-2 px-4 border-b">{funding.amount}</td>
