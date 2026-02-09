@@ -15,8 +15,8 @@ function DonationRequest() {
   }, []);
 
   return (
-    <div className="my-10 lg:my-20">
-      <h2 className="text-4xl lg:text-5xl font-semibold lg:font-bold text-center mb-4 lg:mb-6">
+    <div className="my-8 lg:my-18">
+      <h2 className="text-3xl lg:text-5xl font-semibold lg:font-bold text-center mb-4 lg:mb-6">
         Donation Request Page
       </h2>
       <div className="overflow-x-auto">
