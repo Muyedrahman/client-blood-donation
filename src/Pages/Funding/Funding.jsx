@@ -1,7 +1,20 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const Funding = () => {
+    const [fundings, setFundings] = useState([]);
+
+    useEffect(() => {
+      const fetchFundings = async () => {
+        const response = await axios.get(
+          "https://blood-for-life.vercel.app/fundings",
+        );
+        setFundings(response.data);
+      };
+
+      fetchFundings();
+    }, []);
   return (
     <div className="container mx-auto px-4 my-10">
       <div className="flex justify-between items-center my-8">
@@ -19,7 +32,17 @@ const Funding = () => {
               <th className="py-2 px-4 border-b">Date</th>
             </tr>
           </thead>
-          <tbody>{/* Fundings will be displayed here */}</tbody>
+          <tbody>
+            {fundings.map((funding) => (
+              <tr key={funding.id}>
+                <td className="py-2 px-4 border-b">{funding.name}</td>
+                <td className="py-2 px-4 border-b">{funding.amount}</td>
+                <td className="py-2 px-4 border-b">
+                  {new Date(funding.date).toLocaleDateString()}
+                </td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       </div>
     </div>
